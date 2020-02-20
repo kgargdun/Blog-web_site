@@ -57,10 +57,17 @@ app.get("/posts/:postId", function(request, response) {
     if(_.lowerCase(entries[i].entryTitle)===myTitle)
     {
       console.log("Match found");
+      response.render("post.ejs",{
+        postHeading:entries[i].entryTitle,
+        postContent:entries[i].entryBody,
+      });
       break;
     }
     else
-    console.log("Match not found");
+    {
+      console.log("Match not found");
+    }
+
    }
 
   console.log(myTitle);
@@ -87,7 +94,11 @@ app.post("/compose",function(request,response)
 //
 // $("#contact").on("click",function(event)
 // { console.log(this.id); });
-
+app.post("/more",function(req,res)
+{
+  console.log(req.body);
+  res.redirect("/posts/"+req.body.button)
+})
 
 
 
